@@ -14,6 +14,12 @@ function! lexima#endwise_rule#make()
     call add(rules, lexima#endwise_rule#make_rule('^\s*' . at . '\s\+.\+\%#$', at . ' END', 'vim', []))
   endfor
 
+  " verilog
+  call add(rules, lexima#endwise_rule#make_rule('\%(^\s*#.*\)\@<!begin\s*\%#$', 'end', 'systemverilog', []))
+  call add(rules, lexima#endwise_rule#make_rule('\%(^\s*#.*\)\@<!module\s*\%#$', 'endmodule', 'systemverilog', []))
+  call add(rules, lexima#endwise_rule#make_rule('\%(^\s*#.*\)\@<!begin\s*\%#$', 'end', 'verilog', []))
+  call add(rules, lexima#endwise_rule#make_rule('\%(^\s*#.*\)\@<!module\s*\%#$', 'endmodule', 'verilog', []))
+  
   " ruby
   call add(rules, lexima#endwise_rule#make_rule('^\s*\%(module\|def\|class\|if\|unless\|for\|while\|until\|case\)\>\%(.*[^.:@$]\<end\>\)\@!.*\%#$', 'end', 'ruby', []))
   call add(rules, lexima#endwise_rule#make_rule('^\s*\%(begin\)\s*\%#$', 'end', 'ruby', []))
